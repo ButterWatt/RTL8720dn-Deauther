@@ -1,0 +1,33 @@
+name: Build RTL8720DN Firmware
+
+on:
+  push:
+    paths:
+      - '*.ino'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout sketch
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y git python3 build-essential gcc-arm-none-eabi
+
+    - name: Clone RTL8720DN Arduino Core
+      run: |
+        git clone --depth=1 https://github.com/ambiot/ambd_arduino.git ~/ambd_arduino
+
+    - name: Build firmware
+      run: |
+        cd ~/ambd_arduino/Arduino_package/hardware/libraries/AmebaD
+        python3 tools/compile_arduino.py --board=RTL8720DN --sketch=$GITHUB_WORKSPACE/sketch.ino
+
+    - name: Upload binary
+      uses: actions/upload-artifact@v3
+      with:
+        name: rtl8720dn-bin
+        path: ~/ambd_arduino/Arduino_package/build_output/*.bin
