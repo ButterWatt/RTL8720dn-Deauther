@@ -27,7 +27,7 @@ jobs:
         python3 tools/compile_arduino.py --board=RTL8720DN --sketch=$GITHUB_WORKSPACE/RTL8720dn-Deauther.ino
 
     - name: Upload binary
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: rtl8720dn-bin
         path: ~/ambd_arduino/Arduino_package/build_output/build.bin
