@@ -24,10 +24,10 @@ jobs:
     - name: Build firmware
       run: |
         cd ~/ambd_arduino/Arduino_package/hardware/libraries/AmebaD
-        python3 tools/compile_arduino.py --board=RTL8720DN --sketch=$GITHUB_WORKSPACE/sketch.ino
+        python3 tools/compile_arduino.py --board=RTL8720DN --sketch=$GITHUB_WORKSPACE/RTL8720dn-Deauther.ino
 
     - name: Upload binary
       uses: actions/upload-artifact@v3
       with:
         name: rtl8720dn-bin
-        path: ~/ambd_arduino/Arduino_package/build_output/*.bin
+        path: ~/ambd_arduino/Arduino_package/build_output/build.bin
