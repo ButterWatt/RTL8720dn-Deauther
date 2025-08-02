@@ -2,8 +2,8 @@ name: Build RTL8720DN Firmware
 
 on:
   push:
-    paths:
-      - '*.ino'
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
